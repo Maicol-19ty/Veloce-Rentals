@@ -1,0 +1,3 @@
+db.url=jdbc:mysql://<ip>:<port>/<schema>
+db.user=
+db.password=
