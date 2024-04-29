@@ -1,4 +1,4 @@
-package cue.edu.co.velocerentals;
+package cue.edu.co.velocerentals.view;
 
 import java.io.*;
 
