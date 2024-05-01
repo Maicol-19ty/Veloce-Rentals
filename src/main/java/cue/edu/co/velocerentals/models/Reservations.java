@@ -12,7 +12,7 @@ import java.util.Date;
 @Builder
 
 public class Reservations {
-   private int reservation_i;
+   private int reservation_id;
    private String user_id;
    private String vehicle_id;
    private Date start_date;
