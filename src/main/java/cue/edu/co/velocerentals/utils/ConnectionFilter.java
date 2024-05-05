@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet("/*")
+@WebServlet("/ConnectionFilter")
 public class ConnectionFilter implements Filter {
 
     @Override
