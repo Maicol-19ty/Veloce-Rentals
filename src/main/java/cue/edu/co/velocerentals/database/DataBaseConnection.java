@@ -8,9 +8,9 @@ import java.util.Properties;
 
 public class DataBaseConnection {
 
-    private static String url;
-    private static String user;
-    private static String password;
+    private static final String url;
+    private static final String user;
+    private static final String password;
 
     static {
         try (InputStream input = DataBaseConnection.class.getClassLoader().getResourceAsStream("database.properties")) {
