@@ -10,7 +10,7 @@
     <link rel="icon" href="assets/images/icon.ico" type="image/x-ico">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css">
 
@@ -68,32 +68,48 @@
     </ul>
 </div>
 
-<main class="form-signin w-100 m-auto">
-    <form>
-        <img class="mb-4" src="assets/images/icon.png" alt="Veloce Rentals" width="300" height="200">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                <div class="card-img-left d-none d-md-flex">
+                    <!-- Background image for card set in CSS! -->
+                </div>
+                <div class="card-body p-4 p-sm-5">
+                    <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
+                    <form>
 
-        <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-        </div>
+                        <hr class="my-4">
 
-        <div class="form-check text-start my-3">
-            <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-                Remember me
-            </label>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com">
+                            <label for="floatingInputEmail">Email address</label>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button class="btn btn-primary w-100 py-2 text-uppercase" type="submit">Sign in</button>
+                        </div>
+
+                        <div class="d-grid mb-2">
+                            <button class="btn btn-primary w-100 py-2 text-uppercase" type="button" onclick="location.href='register.jsp'">Register</button>
+                        </div>
+
+                        <hr class="my-4">
+
+                    </form>
+                </div>
+            </div>
         </div>
-        <button class="btn btn-primary w-100 py-2 mb-3" type="submit">Sign in</button>
-        <br/>
-        <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
-        <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
-    </form>
-</main>
+    </div>
+</div>
+
 
     <!-- Bootstrap JS -->
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>

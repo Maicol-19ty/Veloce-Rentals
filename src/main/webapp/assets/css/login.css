@@ -1,3 +1,17 @@
+.card-img-left {
+    width: 45%;
+    /* Link to your background image using in the property below! */
+    background: scroll center url('../images/icon.png');
+    background-size: cover;
+}
+
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+}
+
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -51,7 +65,7 @@
 }
 
 .btn-bd-primary {
-    --bd-violet-bg: #00182B;
+    --bd-violet-bg: #0d6efd;
     --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
 
     --bs-btn-font-weight: 600;
@@ -78,25 +92,4 @@
 html,
 body {
     height: 100%;
-}
-
-.form-signin {
-    max-width: 330px;
-    padding: 1rem;
-}
-
-.form-signin .form-floating:focus-within {
-    z-index: 2;
-}
-
-.form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
 }
