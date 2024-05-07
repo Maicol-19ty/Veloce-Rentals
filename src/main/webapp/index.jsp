@@ -5,7 +5,7 @@
 
     <script src="assets/js/color-modes.js"></script>
 
-    <title>Veloce Rentals · Login</title>
+    <title>Veloce Rentals ⚬ Login</title>
 
     <link rel="icon" href="assets/images/icon.ico" type="image/x-ico">
 

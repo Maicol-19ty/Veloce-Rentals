@@ -2,14 +2,14 @@ package cue.edu.co.velocerentals.utils;
 
 import cue.edu.co.velocerentals.database.DataBaseConnection;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet("/ConnectionFilter")
+@WebFilter("/*")
 public class ConnectionFilter implements Filter {
 
     @Override
