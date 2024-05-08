@@ -1,4 +1,4 @@
-package cue.edu.co.velocerentals.utils;
+package cue.edu.co.velocerentals.enums;
 
 public enum VehicleStatus {
 
