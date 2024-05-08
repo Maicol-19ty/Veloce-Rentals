@@ -1,3 +1,10 @@
 db.url=jdbc:mysql://<ip>:<port>/<schema>
 db.user=
 db.password=
+db.driver=
+
+pool.initialSize= Initial pool size
+pool.maxTotal= Maximum number of active connections
+pool.maxIdle= Maximum number of idle connections
+pool.minIdle= Minimum number of idle connections
+pool.maxWaitMillis= Maximum wait time to get a connection

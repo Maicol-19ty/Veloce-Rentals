@@ -1,6 +1,6 @@
 package cue.edu.co.velocerentals.mapping.DTO;
 
-import cue.edu.co.velocerentals.utils.PaymentMethods;
+import cue.edu.co.velocerentals.enums.PaymentMethods;
 
 import java.time.LocalDateTime;
 

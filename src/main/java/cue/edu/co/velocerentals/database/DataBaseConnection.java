@@ -1,16 +1,16 @@
 package cue.edu.co.velocerentals.database;
 
+import cue.edu.co.velocerentals.exceptions.ServiceJdbcException;
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
 public class DataBaseConnection {
 
-    private static final String url;
-    private static final String user;
-    private static final String password;
+    private static final BasicDataSource dataSource = new BasicDataSource();
 
     static {
         try (InputStream input = DataBaseConnection.class.getClassLoader().getResourceAsStream("database.properties")) {
@@ -19,21 +19,26 @@ public class DataBaseConnection {
                 throw new RuntimeException("Unable to find database.properties");
             }
             prop.load(input);
-            url = prop.getProperty("db.url");
-            user = prop.getProperty("db.user");
-            password = prop.getProperty("db.password");
+
+            dataSource.setUrl(prop.getProperty("db.url"));
+            dataSource.setUsername(prop.getProperty("db.user"));
+            dataSource.setPassword(prop.getProperty("db.password"));
+
+            dataSource.setInitialSize(Integer.parseInt(prop.getProperty("pool.initialSize", "5")));
+            dataSource.setMaxTotal(Integer.parseInt(prop.getProperty("pool.maxTotal", "10")));
+            dataSource.setMaxIdle(Integer.parseInt(prop.getProperty("pool.maxIdle", "5")));
+            dataSource.setMinIdle(Integer.parseInt(prop.getProperty("pool.minIdle", "1")));
+            dataSource.setMaxWaitMillis(Long.parseLong(prop.getProperty("pool.maxWaitMillis", "10000")));
         } catch (Exception ex) {
             throw new RuntimeException("Error loading database properties", ex);
         }
     }
 
-    public static Connection getConnection() throws SQLException {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return DriverManager.getConnection(url, user, password);
+    public static Connection getInstance() throws SQLException, ServiceJdbcException {
+        return dataSource.getConnection();
     }
 
+    public static void closePool() throws SQLException {
+        dataSource.close();
+    }
 }

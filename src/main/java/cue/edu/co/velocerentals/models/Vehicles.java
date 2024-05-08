@@ -1,9 +1,11 @@
 package cue.edu.co.velocerentals.models;
 
-import cue.edu.co.velocerentals.utils.VehicleStatus;
-import cue.edu.co.velocerentals.utils.VehicleType;
+import cue.edu.co.velocerentals.enums.VehicleStatus;
+import cue.edu.co.velocerentals.enums.VehicleType;
+import jakarta.enterprise.context.SessionScoped;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.Year;
 
 @NoArgsConstructor
@@ -12,8 +14,9 @@ import java.time.Year;
 @Getter
 @ToString
 @Builder
+@SessionScoped
 
-public class Vehicles {
+public class Vehicles implements Serializable {
     private Integer vehicle_id;
     private VehicleType type;
     private String make;
