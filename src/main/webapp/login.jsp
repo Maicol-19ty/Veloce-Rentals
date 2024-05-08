@@ -9,10 +9,12 @@
 
     <link rel="icon" href="assets/images/icon.ico" type="image/x-ico">
 
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="assets/css/login.css">
+    <!-- Bootstrap Stylesheet-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="assets/css/login.css">
 
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
