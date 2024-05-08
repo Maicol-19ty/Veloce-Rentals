@@ -1,7 +1,7 @@
 package cue.edu.co.velocerentals.mapping.DTO;
 
-import cue.edu.co.velocerentals.utils.VehicleStatus;
-import cue.edu.co.velocerentals.utils.VehicleType;
+import cue.edu.co.velocerentals.enums.VehicleStatus;
+import cue.edu.co.velocerentals.enums.VehicleType;
 
 import java.time.Year;
 
