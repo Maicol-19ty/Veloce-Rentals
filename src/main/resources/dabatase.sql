@@ -42,3 +42,16 @@ CREATE TABLE transactions (
                               payment_method ENUM('credit card', 'debit card', 'cash') NOT NULL,
                               FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id)
 );
+
+CREATE TABLE roles (
+                       role_id INT AUTO_INCREMENT PRIMARY KEY,
+                       role_name VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE user_roles (
+                            user_id INT,
+                            role_id INT,
+                            PRIMARY KEY (user_id, role_id),
+                            FOREIGN KEY (user_id) REFERENCES users (user_id),
+                            FOREIGN KEY (role_id) REFERENCES roles (role_id)
+);
