@@ -61,7 +61,6 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
     public UsersCredentials findUserAndHashPassword(String username) {
 
         UsersCredentials usersCredentials = null;
-
         try {
             conn = DataBaseConnection.getInstance();
             String sql = "SELECT u.password, r.role_name FROM users u " +
