@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="jakarta.servlet.http.Cookie" %>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 
     <script src="assets/js/color-modes.js"></script>
@@ -18,6 +20,21 @@
     <link href="assets/css/main.css" rel="stylesheet" />
 </head>
 <body class="bg-body-tertiary">
+
+    <%
+        String userSession = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("userLogged".equals(cookie.getName())) {
+                    userSession = cookie.getValue();
+                    break;
+                }
+            }
+        }
+        request.setAttribute("userSession", userSession);
+    %>
+
 
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="check2" viewBox="0 0 16 16">
@@ -92,10 +109,26 @@
                 </li>
             </ul>
             <form class="d-flex">
-                <button onclick="location.href='login.jsp'" class="btn btn-outline-dark" type="button">
-                    <i class="bi-person me-1 "></i>
-                    Login
-                </button>
+                <c:choose>
+                    <c:when test="${not empty userSession}">
+                        <div class="btn-group">
+                            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi-person-circle me-1"></i> ${userSession}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="perfil.jsp">Perfil</a></li>
+                                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item bi-box-arrow-right" href="logout"> Logout</a></li>
+                            </ul>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <button onclick="location.href='login.jsp'" class="btn btn-outline-dark" type="button">
+                            <i class="bi-person-circle me-1"></i> Login
+                        </button>
+                    </c:otherwise>
+                </c:choose>
             </form>
         </div>
     </div>
