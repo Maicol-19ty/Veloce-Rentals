@@ -75,23 +75,29 @@
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
                 <div class="card-img-left d-none d-md-flex">
-                    <!-- Background image for card set in CSS! -->
                 </div>
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
-                    <form>
+
+                    <% if (request.getAttribute("error") != null) { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= request.getAttribute("error") %>
+                    </div>
+                    <% } %>
+
+                    <form action="login" method="post">
 
                         <hr class="my-4">
 
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com">
-                            <label for="floatingInputEmail">Email address</label>
+                            <input type="text" class="form-control" id="floatingInputUsername" name="username" placeholder="myusername" required autofocus>
+                            <label for="floatingInputUsername">Username</label>
                         </div>
 
                         <hr>
 
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
 

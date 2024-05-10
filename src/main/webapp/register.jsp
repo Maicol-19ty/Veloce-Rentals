@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
 
     <script src="assets/js/color-modes.js"></script>
@@ -75,38 +76,44 @@
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
                 <div class="card-img-left d-none d-md-flex">
-                    <!-- Background image for card set in CSS! -->
                 </div>
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
-                    <form>
+
+                    <% if (request.getAttribute("error") != null) { %>
+                        <div class="alert alert-danger" role="alert">
+                            <%= request.getAttribute("error") %>
+                        </div>
+                    <% } %>
+
+                    <form action="register" method="post">
 
                         <hr class="my-4">
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInputFullName" placeholder="myfullname" required autofocus>
+                            <input type="text" class="form-control" id="floatingInputFullName" name="full_name" placeholder="myfullname" required autofocus>
                             <label for="floatingInputFullName">Full Name</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInputUsername" placeholder="myusername" required autofocus>
+                            <input type="text" class="form-control" id="floatingInputUsername" name="username" placeholder="myusername" required autofocus>
                             <label for="floatingInputUsername">Username</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com">
+                            <input type="email" class="form-control" id="floatingInputEmail" name="email" placeholder="name@example.com">
                             <label for="floatingInputEmail">Email address</label>
                         </div>
 
                         <hr>
 
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPasswordConfirm" placeholder="Confirm Password">
+                            <input type="password" class="form-control" id="floatingPasswordConfirm" name="passwordConfirm" placeholder="Confirm Password">
                             <label for="floatingPasswordConfirm">Confirm Password</label>
                         </div>
 

@@ -23,11 +23,12 @@ public class DataBaseConnection {
             dataSource.setUrl(prop.getProperty("db.url"));
             dataSource.setUsername(prop.getProperty("db.user"));
             dataSource.setPassword(prop.getProperty("db.password"));
+            dataSource.setDriverClassName(prop.getProperty("db.driver"));
 
             dataSource.setInitialSize(Integer.parseInt(prop.getProperty("pool.initialSize", "5")));
-            dataSource.setMaxTotal(Integer.parseInt(prop.getProperty("pool.maxTotal", "10")));
-            dataSource.setMaxIdle(Integer.parseInt(prop.getProperty("pool.maxIdle", "5")));
-            dataSource.setMinIdle(Integer.parseInt(prop.getProperty("pool.minIdle", "1")));
+            dataSource.setMaxTotal(Integer.parseInt(prop.getProperty("pool.maxTotal", "20")));
+            dataSource.setMaxIdle(Integer.parseInt(prop.getProperty("pool.maxIdle", "10")));
+            dataSource.setMinIdle(Integer.parseInt(prop.getProperty("pool.minIdle", "2")));
             dataSource.setMaxWaitMillis(Long.parseLong(prop.getProperty("pool.maxWaitMillis", "10000")));
         } catch (Exception ex) {
             throw new RuntimeException("Error loading database properties", ex);
