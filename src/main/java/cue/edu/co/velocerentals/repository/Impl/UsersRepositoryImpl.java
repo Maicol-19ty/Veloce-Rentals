@@ -4,6 +4,7 @@ import cue.edu.co.velocerentals.annotations.MySqlConn;
 import cue.edu.co.velocerentals.database.DataBaseConnection;
 import cue.edu.co.velocerentals.exceptions.ServiceJdbcException;
 import cue.edu.co.velocerentals.mapping.DTO.UsersDTo;
+import cue.edu.co.velocerentals.models.UsersCredentials;
 import cue.edu.co.velocerentals.repository.UsersRepository;
 import cue.edu.co.velocerentals.utils.HashingUtil;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -57,19 +58,26 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
     }
 
     @Override
-    public String findUserAndHashPassword(String username) {
+    public UsersCredentials findUserAndHashPassword(String username) {
 
+        UsersCredentials usersCredentials = null;
         try {
             conn = DataBaseConnection.getInstance();
-            PreparedStatement statement = conn.prepareStatement("SELECT password FROM users WHERE username = ?");
+            String sql = "SELECT u.password, r.role_name FROM users u " +
+                    "JOIN user_roles ur ON u.user_id = ur.user_id " +
+                    "JOIN roles r ON ur.role_id = r.role_id " +
+                    "WHERE u.username = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getString("password");
+                String password = resultSet.getString("password");
+                String roleName = resultSet.getString("role_name");
+                usersCredentials = new UsersCredentials(username, password, roleName);
             }
         } catch (SQLException | ServiceJdbcException e) {
             e.printStackTrace();
         }
-        return null;
+        return usersCredentials;
     }
 }

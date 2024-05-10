@@ -1,5 +1,6 @@
 package cue.edu.co.velocerentals.servlets;
 
+import cue.edu.co.velocerentals.models.UsersCredentials;
 import cue.edu.co.velocerentals.service.UsersService;
 import cue.edu.co.velocerentals.utils.HashingUtil;
 import jakarta.inject.Inject;
@@ -24,17 +25,23 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         try {
-            String storeHash = usersService.findUserAndHashPassword(username);
-            if (storeHash != null && HashingUtil.checkPassword(password, storeHash)) {
+            UsersCredentials credentials = usersService.findUserAndHashPassword(username);
 
+            if (credentials != null && HashingUtil.checkPassword(password, credentials.getPassword())) {
                 Cookie cookie = new Cookie("userLogged", username);
                 cookie.setMaxAge(60 * 60 * 24 * 30);
-                cookie.setHttpOnly(true);
                 cookie.setPath("/");
+                cookie.setHttpOnly(true);
                 resp.addCookie(cookie);
 
                 req.getSession().setAttribute("userLogged", username);
-                resp.sendRedirect("main.jsp");
+                req.getSession().setAttribute("user", credentials.getRoleName());
+
+                if ("Admin".equals(credentials.getRoleName())) {
+                    resp.sendRedirect("admin.jsp");
+                } else {
+                    resp.sendRedirect("main.jsp");
+                }
 
             } else {
                 req.setAttribute("error", "User or password incorrect");
