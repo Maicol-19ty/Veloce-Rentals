@@ -40,6 +40,4 @@ public class ProducerResources {
         connection.close();
         log.info("Connection closed");
     }
-
-
 }
