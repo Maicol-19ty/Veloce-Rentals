@@ -2,6 +2,7 @@ package cue.edu.co.velocerentals.service.Impl;
 
 import cue.edu.co.velocerentals.mapping.DTO.UsersDTo;
 
+import cue.edu.co.velocerentals.models.UsersCredentials;
 import cue.edu.co.velocerentals.repository.UsersRepository;
 import cue.edu.co.velocerentals.service.UsersService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -28,7 +29,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public String findUserAndHashPassword(String username) {
+    public UsersCredentials findUserAndHashPassword(String username) {
         return usersRepository.findUserAndHashPassword(username);
     }
 }
