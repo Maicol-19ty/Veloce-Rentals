@@ -37,22 +37,20 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
         );
     }
 
+    /*
+     * This method retrieves a list of all vehicles from the database.
+     * @return A list of Vehicles objects.
+     */
     @Override
     public List<Vehicles> listVehicles() {
-
         PreparedStatement stmt = null;
-
         List<Vehicles> vehicles = new ArrayList<>();
-
         try {
-
             conn = DataBaseConnection.getInstance();
             conn.setAutoCommit(false);
-
             String sqlListVehicles = "SELECT * FROM vehicles";
             stmt = conn.prepareStatement(sqlListVehicles);
             ResultSet rs = stmt.executeQuery();
-
             while (rs.next()) {
                 vehicles.add(mapToVehicle(rs));
             }
@@ -72,25 +70,22 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
         return vehicles;
     }
 
+    /*
+     * This method retrieves a list of vehicles with a specified status from the database.
+     * @param status The status of the vehicles to retrieve.
+     * @return A list of Vehicles objects with the specified status.
+     */
     @Override
     public List<Vehicles> listVehiclesStatus(VehicleStatus status) {
-
         PreparedStatement stmt = null;
-
         List<Vehicles> vehicles = new ArrayList<>();
-
         try {
-
             conn = DataBaseConnection.getInstance();
             conn.setAutoCommit(false);
-
             String sqlListVehicles = "SELECT * FROM vehicles WHERE LOWER(status) = LOWER(?)";
             stmt = conn.prepareStatement(sqlListVehicles);
-
             stmt.setString(1, status.name());
-
             ResultSet rs = stmt.executeQuery();
-
             while (rs.next()) {
                 vehicles.add(mapToVehicle(rs));
             }
@@ -110,28 +105,25 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
         return vehicles;
     }
 
+    /*
+     * This method retrieves a list of vehicles with a specified type from the database.
+     * @param type The type of the vehicles to retrieve.
+     * @return A list of Vehicles objects with the specified type.
+     */
     @Override
     public List<Vehicles> listVehiclesType(VehicleType type) {
         PreparedStatement stmt = null;
-
         List<Vehicles> vehicles = new ArrayList<>();
-
         try {
-
             conn = DataBaseConnection.getInstance();
             conn.setAutoCommit(false);
-
             String sqlListVehicles = "SELECT * FROM vehicles WHERE LOWER(type) = LOWER(?)";
             stmt = conn.prepareStatement(sqlListVehicles);
-
             stmt.setString(1, type.name());
-
             ResultSet rs = stmt.executeQuery();
-
             while (rs.next()) {
                 vehicles.add(mapToVehicle(rs));
             }
-
         } catch (SQLException | ServiceJdbcException e) {
             if (conn != null) {
                 try {
@@ -145,30 +137,26 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
             if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
             if (conn != null) try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ignore) {}
         }
-
         return vehicles;
     }
 
+    /*
+     * This method retrieves a list of vehicles ordered by price in ascending order from the database.
+     * @return A list of Vehicles objects ordered by price in ascending order.
+     */
     @Override
     public List<Vehicles> listVehiclesPriceAsc() {
         PreparedStatement stmt = null;
-
         List<Vehicles> vehicles = new ArrayList<>();
-
         try {
-
             conn = DataBaseConnection.getInstance();
             conn.setAutoCommit(false);
-
             String sqlListVehicles = "SELECT * FROM vehicles ORDER BY price_per_day ASC";
             stmt = conn.prepareStatement(sqlListVehicles);
-
             ResultSet rs = stmt.executeQuery();
-
             while (rs.next()) {
                 vehicles.add(mapToVehicle(rs));
             }
-
         } catch (SQLException | ServiceJdbcException e) {
             if (conn != null) {
                 try {
@@ -182,30 +170,26 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
             if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
             if (conn != null) try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ignore) {}
         }
-
         return vehicles;
     }
 
+    /*
+     * This method retrieves a list of vehicles ordered by price in descending order from the database.
+     * @return A list of Vehicles objects ordered by price in descending order.
+     */
     @Override
     public List<Vehicles> listVehiclesPriceDesc() {
         PreparedStatement stmt = null;
-
         List<Vehicles> vehicles = new ArrayList<>();
-
         try {
-
             conn = DataBaseConnection.getInstance();
             conn.setAutoCommit(false);
-
             String sqlListVehicles = "SELECT * FROM vehicles ORDER BY price_per_day DESC";
             stmt = conn.prepareStatement(sqlListVehicles);
-
             ResultSet rs = stmt.executeQuery();
-
             while (rs.next()) {
                 vehicles.add(mapToVehicle(rs));
             }
-
         } catch (SQLException | ServiceJdbcException e) {
             if (conn != null) {
                 try {
@@ -219,7 +203,6 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
             if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
             if (conn != null) try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ignore) {}
         }
-
         return vehicles;
     }
-}
+

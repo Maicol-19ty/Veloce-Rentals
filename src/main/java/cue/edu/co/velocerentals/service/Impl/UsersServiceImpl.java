@@ -13,7 +13,6 @@ import java.sql.SQLException;
 @ApplicationScoped
 public class UsersServiceImpl implements UsersService {
 
-    // Injected UsersRepository instance.
     @Inject
     private UsersRepository<UsersDTo> usersRepository;
 
