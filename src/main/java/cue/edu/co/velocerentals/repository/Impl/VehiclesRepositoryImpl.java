@@ -64,8 +64,15 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
             }
             e.printStackTrace();
         } finally {
-            if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
-            if (conn != null) try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ignore) {}
+            if (stmt != null) try {
+                stmt.close();
+            } catch (SQLException ignore) {
+            }
+            if (conn != null) try {
+                conn.setAutoCommit(true);
+                conn.close();
+            } catch (SQLException ignore) {
+            }
         }
         return vehicles;
     }
@@ -99,8 +106,15 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
             }
             e.printStackTrace();
         } finally {
-            if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
-            if (conn != null) try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ignore) {}
+            if (stmt != null) try {
+                stmt.close();
+            } catch (SQLException ignore) {
+            }
+            if (conn != null) try {
+                conn.setAutoCommit(true);
+                conn.close();
+            } catch (SQLException ignore) {
+            }
         }
         return vehicles;
     }
@@ -134,8 +148,15 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
             }
             e.printStackTrace();
         } finally {
-            if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
-            if (conn != null) try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ignore) {}
+            if (stmt != null) try {
+                stmt.close();
+            } catch (SQLException ignore) {
+            }
+            if (conn != null) try {
+                conn.setAutoCommit(true);
+                conn.close();
+            } catch (SQLException ignore) {
+            }
         }
         return vehicles;
     }
@@ -167,8 +188,15 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
             }
             e.printStackTrace();
         } finally {
-            if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
-            if (conn != null) try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ignore) {}
+            if (stmt != null) try {
+                stmt.close();
+            } catch (SQLException ignore) {
+            }
+            if (conn != null) try {
+                conn.setAutoCommit(true);
+                conn.close();
+            } catch (SQLException ignore) {
+            }
         }
         return vehicles;
     }
@@ -200,9 +228,17 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
             }
             e.printStackTrace();
         } finally {
-            if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
-            if (conn != null) try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ignore) {}
+            if (stmt != null) try {
+                stmt.close();
+            } catch (SQLException ignore) {
+            }
+            if (conn != null) try {
+                conn.setAutoCommit(true);
+                conn.close();
+            } catch (SQLException ignore) {
+            }
         }
         return vehicles;
     }
+}
 
