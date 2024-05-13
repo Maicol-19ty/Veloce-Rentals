@@ -17,9 +17,8 @@ public class UsersServiceImpl implements UsersService {
     private UsersRepository<UsersDTo> usersRepository;
 
     @Override
-    public boolean register(UsersDTo usersDTo) {
-        usersRepository.register(usersDTo);
-        return false;
+    public void register(UsersDTo usersDTo, int roleId) {
+        usersRepository.register(usersDTo, roleId);
     }
 
     @Override
