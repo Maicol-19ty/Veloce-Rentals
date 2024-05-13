@@ -19,9 +19,8 @@ public class UsersServiceImpl implements UsersService {
 
     // Method to register a user.
     @Override
-    public boolean register(UsersDTo usersDTo) {
-        usersRepository.register(usersDTo);
-        return false;
+    public void register(UsersDTo usersDTo, int roleId) {
+        usersRepository.register(usersDTo, roleId);
     }
 
     // Method to check if a user exists by username or email.
