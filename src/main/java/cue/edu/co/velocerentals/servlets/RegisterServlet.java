@@ -25,8 +25,8 @@ public class RegisterServlet extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String fullName = req.getParameter("full_name");
+        int defaultRoleId = 1;
 
-        System.out.println("Verificando usuario: " + username + ", Email: " + email);
 
         UsersDTo usersDTo = UsersDTo.builder()
                 .username(username)
@@ -41,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
                 req.getRequestDispatcher("register.jsp").forward(req, resp);
             } else {
 
-                usersService.register(usersDTo);
+                usersService.register(usersDTo, defaultRoleId);
 
                 Cookie cookie = new Cookie("userLogged", username);
                 cookie.setMaxAge(60 * 60 * 24 * 30);

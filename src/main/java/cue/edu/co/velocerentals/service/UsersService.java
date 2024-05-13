@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public interface UsersService {
 
-    boolean register(UsersDTo usersDTo);
+    void register(UsersDTo usersDTo, int roleId);
     boolean checkUser(String username, String email) throws SQLException;
     UsersCredentials findUserAndHashPassword(String username);
 }

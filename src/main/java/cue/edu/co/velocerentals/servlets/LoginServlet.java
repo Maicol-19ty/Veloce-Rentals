@@ -35,13 +35,9 @@ public class LoginServlet extends HttpServlet {
                 resp.addCookie(cookie);
 
                 req.getSession().setAttribute("userLogged", username);
-                req.getSession().setAttribute("user", credentials.getRoleName());
+                req.getSession().setAttribute("userRole", credentials.getRoleName());
 
-                if ("Admin".equals(credentials.getRoleName())) {
-                    resp.sendRedirect("admin.jsp");
-                } else {
-                    resp.sendRedirect("main.jsp");
-                }
+                resp.sendRedirect("main.jsp");
 
             } else {
                 req.setAttribute("error", "User or password incorrect");
