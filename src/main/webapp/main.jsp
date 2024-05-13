@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <script src="assets/js/color-modes.js"></script>
 
     <meta charset="utf-8" />
@@ -34,7 +33,6 @@
         }
         request.setAttribute("userSession", userSession);
     %>
-
 
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="check2" viewBox="0 0 16 16">
@@ -90,21 +88,29 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#!">
+        <a class="navbar-brand" href="main.jsp">
             <img src="assets/images/icon.ico" alt="Logo" style="height: 30px; margin-right: 10px;">
             Veloce Rentals</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="main.jsp">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Vehicles</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">All Vehicles</a></li>
+                        <li><a class="dropdown-item bi bi-arrow-return-right me-1" href="vehicleFilter?filter=all"> All Vehicles</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Popular Vehicles</a></li>
-                        <li><a class="dropdown-item" href="#!">New Vehicles</a></li>
+                        <li><a class="dropdown-item bi bi-coin me-1" href="vehicleFilter?filter=price_asc"> Price: Low to Higth</a></li>
+                        <li><a class="dropdown-item bi bi-coin me-1" href="vehicleFilter?filter=price_desc"> Price: Higth to Low</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item bi bi-arrow-return-right me-1" href="vehicleFilter?filter=type&type=motorcycle"> Motorcycles</a></li>
+                        <li><a class="dropdown-item bi bi-arrow-return-right me-1" href="vehicleFilter?filter=type&type=car"> Cars</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item bi bi-check-circle-fill me-1" href="vehicleFilter?filter=status&status=available"> Available</a></li>
+                        <li><a class="dropdown-item bi bi-cart-fill me-1" href="vehicleFilter?filter=status&status=rented"> Rented</a></li>
+                        <li><a class="dropdown-item bi bi-wrench me-1" href="vehicleFilter?filter=status&status=maintenance"> Maintenance</a></li>
+
                     </ul>
                 </li>
             </ul>
@@ -116,16 +122,18 @@
                                 <i class="bi-person-circle me-1"></i> ${userSession}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="perfil.jsp">Perfil</a></li>
-                                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="profile.jsp">Profile</a></li>
+                                <c:if test="${userRole eq 'Admin'}">
+                                    <li><a class="dropdown-item" href="profile.jsp">Dashboard</a></li>
+                                </c:if>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item bi-box-arrow-right" href="logout"> Logout</a></li>
+                                <li><a class="dropdown-item bi bi-box-arrow-left" href="logout"> Logout</a></li>
                             </ul>
                         </div>
                     </c:when>
                     <c:otherwise>
                         <button onclick="location.href='login.jsp'" class="btn btn-outline-dark" type="button">
-                            <i class="bi-person-circle me-1"></i> Login
+                            <i class="bi bi-person-circle me-1"></i> Login
                         </button>
                     </c:otherwise>
                 </c:choose>
@@ -143,197 +151,25 @@
     </div>
 </header>
 <!-- Section-->
-<section class="py-5">
+<section class="py-5" id="vehicles-section">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">Vehicle Make</h5>
-                            <!-- Product price-->
-                            Rental price per day
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Reserve</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">Vehicle Make</h5>
-                            <!-- Product reviews-->
-                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
+            <c:forEach var="vehicle" items="${vehiclesList}">
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="...">
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">${vehicle.make} ${vehicle.model}</h5>
+                                Rental price per day: ${vehicle.price_per_day}
                             </div>
-                            <!-- Product price-->
-                            <span class="text-muted text-decoration-line-through">$20.00</span>
-                            Rental price per day
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="main.jsp">Reserve</a></div>
                         </div>
                     </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Reserve</a></div>
-                    </div>
                 </div>
-            </div>
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">Vehicle Make</h5>
-                            <!-- Product price-->
-                            <span class="text-muted text-decoration-line-through">$50.00</span>
-                            Rental price per day
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Reserve</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">Vehicle Make</h5>
-                            <!-- Product reviews-->
-                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                            <!-- Product price-->
-                            Rental price per day
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Reserve</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">Vehicle Make</h5>
-                            <!-- Product price-->
-                            <span class="text-muted text-decoration-line-through">$50.00</span>
-                            Rental price per day
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Reserve</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">Vehicle Make</h5>
-                            <!-- Product price-->
-                            Rental price per day
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Reserve</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">Vehicle Make</h5>
-                            <!-- Product reviews-->
-                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                            <!-- Product price-->
-                            <span class="text-muted text-decoration-line-through">$20.00</span>
-                            Rental price per day
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Reserve</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">Vehicle Make</h5>
-                            <!-- Product reviews-->
-                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                            <!-- Product price-->
-                            Rental price per day
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Reserve</a></div>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </section>
