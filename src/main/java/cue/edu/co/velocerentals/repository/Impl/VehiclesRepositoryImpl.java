@@ -84,7 +84,7 @@ public class VehiclesRepositoryImpl implements VehiclesRepository<Vehicles> {
             conn = DataBaseConnection.getInstance();
             conn.setAutoCommit(false);
 
-            String sqlListVehicles = "SELECT * FROM vehicles WHERE status = ?";
+            String sqlListVehicles = "SELECT * FROM vehicles WHERE LOWER(status) = LOWER(?)";
             stmt = conn.prepareStatement(sqlListVehicles);
 
             stmt.setString(1, status.name());
