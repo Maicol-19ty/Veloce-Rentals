@@ -21,4 +21,29 @@
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>cue.edu.co.velocerentals.filters.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>LoggingFilter</filter-name>
+        <filter-class>cue.edu.co.velocerentals.filters.LoggingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoggingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <listener>
+        <listener-class>cue.edu.co.velocerentals.listeners.ApplicationLifecycleListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>cue.edu.co.velocerentals.listeners.SessionLifecycleListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>cue.edu.co.velocerentals.listeners.SessionAttributeListener</listener-class>
+    </listener>
 </web-app>
