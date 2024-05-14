@@ -16,30 +16,36 @@ public class VehiclesServiceImpl implements VehiclesService<Vehicles> {
     @Inject
     private VehiclesRepository<Vehicles> vehicleRepository;
 
+    // Setter method for VehiclesRepository, enabling dependency injection
     public void setVehicleRepository(VehiclesRepository<Vehicles> repo) {
         this.vehicleRepository = repo;
     }
 
+    // Method to list all vehicles
     @Override
     public List<Vehicles> listVehicles() {
         return vehicleRepository.listVehicles();
     }
 
+    // Method to list vehicles by status
     @Override
     public List<Vehicles> listVehiclesStatus(VehicleStatus status) {
         return vehicleRepository.listVehiclesStatus(status);
     }
 
+    // Method to list vehicles by type
     @Override
     public List<Vehicles> listVehiclesType(VehicleType type) {
         return vehicleRepository.listVehiclesType(type);
     }
 
+    // Method to list vehicles by ascending price
     @Override
     public List<Vehicles> listVehiclesPriceAsc() {
         return vehicleRepository.listVehiclesPriceAsc();
     }
 
+    // Method to list vehicles by descending price
     @Override
     public List<Vehicles> listVehiclesPriceDesc() {
         return vehicleRepository.listVehiclesPriceDesc();

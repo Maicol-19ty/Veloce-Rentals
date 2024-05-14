@@ -1,3 +1,4 @@
+
 package cue.edu.co.velocerentals.repository.Impl;
 
 import cue.edu.co.velocerentals.annotations.MySqlConn;
@@ -20,6 +21,7 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
     @MySqlConn
     private Connection conn;
 
+    // Method to register a new user in the database.
     @Override
     public void register(UsersDTo usersDTo, int roleId) {
 
@@ -29,6 +31,7 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
             conn = DataBaseConnection.getInstance();
             conn.setAutoCommit(false);
 
+            // SQL query to insert user data into the 'users' table.
             String sqlInsertUser = "INSERT INTO users (username, password, email, full_name) VALUES (?, ?, ?, ?)";
             stmt = conn.prepareStatement(sqlInsertUser, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, usersDTo.username());
@@ -38,6 +41,7 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
             stmt.setString(4, usersDTo.full_name());
             int userInserted = stmt.executeUpdate();
 
+            // If user insertion fails, rollback the transaction.
             if (userInserted == 0) {
                 conn.rollback();
                 return;
@@ -50,14 +54,17 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
             }
             int userId = generatedKeys.getInt(1);
 
+            // SQL query to insert user role into the 'user_roles' table.
             String sqlInsertUserRole = "INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)";
             stmt = conn.prepareStatement(sqlInsertUserRole);
             stmt.setInt(1, userId);
             stmt.setInt(2, roleId);
             stmt.executeUpdate();
 
+            // Commit the transaction after successful registration.
             conn.commit();
         } catch (SQLException | ServiceJdbcException e) {
+            // Rollback transaction if any exception occurs during registration.
             if (conn != null) {
                 try {
                     conn.rollback();
@@ -67,10 +74,20 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
             }
             e.printStackTrace();
         } finally {
-            if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
-            if (conn != null) try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ignore) {}
+            // Close the prepared statement and reset auto-commit mode.
+            if (stmt != null) try {
+                stmt.close();
+            } catch (SQLException ignore) {
+            }
+            if (conn != null) try {
+                conn.setAutoCommit(true);
+                conn.close();
+            } catch (SQLException ignore) {
+            }
         }
     }
+
+    // Method to check if a user with the given username or email already exists.
     @Override
     public boolean checkUser(String username, String email) throws SQLException {
         try {
@@ -83,11 +100,13 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
                 return resultSet.getInt(1) > 0;
             }
         } catch (SQLException | ServiceJdbcException e) {
+            // Throw SQLException if an error occurs during user existence check.
             throw new SQLException("Error checking if username exists.", e);
         }
         return false;
     }
 
+    // Method to find a user by username and retrieve hashed password and role name.
     @Override
     public UsersCredentials findUserAndHashPassword(String username) {
 
@@ -112,6 +131,7 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
         return usersCredentials;
     }
 
+    // Retrieves user details based on the provided username.
     @Override
     public Users userDetails(String username) {
         Users user = null;
@@ -138,6 +158,7 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
         return user;
     }
 
+    // Updates user profile information.
     @Override
     public boolean updateUserProfile(String username, String fullName, String email) {
         boolean updateStatus = false;
@@ -161,12 +182,18 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
             e.printStackTrace();
             updateStatus = false;
         } finally {
-            if (pstmt != null) try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (pstmt != null) try {
+                pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (conn != null) try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return updateStatus;
     }
-
-
 }

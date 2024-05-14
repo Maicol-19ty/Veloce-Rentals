@@ -24,40 +24,50 @@ public class LoadVehicles extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(LoadVehicles.class.getName());
 
+    // Method to handle GET requests
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        // Retrieving filter parameters from the request
         String filter = req.getParameter("filter");
         String type = req.getParameter("type");
         String status = req.getParameter("status");
 
         List<Vehicles> vehiclesList;
 
+        // Checking if a filter is applied and processing accordingly
         if (filter != null) {
             switch (filter) {
                 case "price_asc":
+                    // Sorting vehicles by price in ascending order
                     vehiclesList = vehiclesService.listVehiclesPriceAsc();
                     break;
                 case "price_desc":
+                    // Sorting vehicles by price in descending order
                     vehiclesList = vehiclesService.listVehiclesPriceDesc();
                     break;
                 case "type":
+                    // Filtering vehicles by type
                     VehicleType vehicleType = VehicleType.fromString(type);
                     vehiclesList = vehiclesService.listVehiclesType(vehicleType);
                     break;
                 case "status":
+                    // Filtering vehicles by status
                     VehicleStatus vehicleStatus = VehicleStatus.fromString(status);
                     vehiclesList = vehiclesService.listVehiclesStatus(vehicleStatus);
                     break;
                 default:
+                    // Default case: list all vehicles
                     vehiclesList = vehiclesService.listVehicles();
                     break;
             }
             req.setAttribute("vehiclesList", vehiclesList);
         } else {
+            // If no filter is applied, list all vehicles
             vehiclesList = vehiclesService.listVehicles();
         }
 
+        // Setting attributes and forwarding the request to the main.jsp page
         req.setAttribute("vehiclesListMain", vehiclesList);
         req.getRequestDispatcher("main.jsp").forward(req, resp);
     }
