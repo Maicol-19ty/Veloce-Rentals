@@ -75,8 +75,15 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
             e.printStackTrace();
         } finally {
             // Close the prepared statement and reset auto-commit mode.
-            if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
-            if (conn != null) try { conn.setAutoCommit(true); conn.close(); } catch (SQLException ignore) {}
+            if (stmt != null) try {
+                stmt.close();
+            } catch (SQLException ignore) {
+            }
+            if (conn != null) try {
+                conn.setAutoCommit(true);
+                conn.close();
+            } catch (SQLException ignore) {
+            }
         }
     }
 
@@ -124,6 +131,7 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
         return usersCredentials;
     }
 
+    // Retrieves user details based on the provided username.
     @Override
     public Users userDetails(String username) {
         Users user = null;
@@ -150,6 +158,7 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
         return user;
     }
 
+    // Updates user profile information.
     @Override
     public boolean updateUserProfile(String username, String fullName, String email) {
         boolean updateStatus = false;
@@ -173,12 +182,18 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
             e.printStackTrace();
             updateStatus = false;
         } finally {
-            if (pstmt != null) try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (pstmt != null) try {
+                pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (conn != null) try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return updateStatus;
     }
-
-
 }
