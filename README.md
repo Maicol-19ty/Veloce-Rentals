@@ -1,4 +1,4 @@
-#VeloceRentals
+# VeloceRentals
 
 Veloce Rentals is an online platform for renting cars and motorcycles. This guide describes how to configure and start your Java web application using Jakarta, Tomcat, and MySQL.
 
@@ -9,7 +9,7 @@ Veloce Rentals is an online platform for renting cars and motorcycles. This guid
 - **MySQL**: Install MySQL Server 8.3.
 - **Maven**: Use Maven to manage project dependencies.
 
-##MySQL configuration
+## MySQL configuration
 
 1. Start the MySQL server.
 2. Create a database for the application:
