@@ -22,14 +22,6 @@
         <res-auth>Container</res-auth>
     </resource-ref>
     <filter>
-        <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>cue.edu.co.velocerentals.filters.AuthenticationFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>AuthenticationFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter>
         <filter-name>LoggingFilter</filter-name>
         <filter-class>cue.edu.co.velocerentals.filters.LoggingFilter</filter-class>
     </filter>

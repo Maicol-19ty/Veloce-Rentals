@@ -20,19 +20,19 @@
 </head>
 <body class="bg-body-tertiary">
 
-    <%
-        String userSession = null;
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("userLogged".equals(cookie.getName())) {
-                    userSession = cookie.getValue();
-                    break;
-                }
+<%
+    String userSession = null;
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("userLogged".equals(cookie.getName())) {
+                userSession = cookie.getValue();
+                break;
             }
         }
-        request.setAttribute("userSession", userSession);
-    %>
+    }
+    request.setAttribute("userSession", userSession);
+%>
 
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="check2" viewBox="0 0 16 16">

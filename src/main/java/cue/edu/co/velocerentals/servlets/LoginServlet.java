@@ -1,7 +1,3 @@
-/*
- * This servlet handles user login requests.
- */
-
 package cue.edu.co.velocerentals.servlets;
 
 import cue.edu.co.velocerentals.models.UsersCredentials;
@@ -40,7 +36,7 @@ public class LoginServlet extends HttpServlet {
                 Cookie cookie = new Cookie("userLogged", username);
                 cookie.setMaxAge(60 * 60 * 24 * 30); // Setting cookie expiration time (30 days)
                 cookie.setPath("/"); // Setting cookie path to root
-                cookie.setHttpOnly(true); // Making the cookie accessible only via HTTP (not JavaScript)
+                cookie.setHttpOnly(true); // Making the cookie accessible only via HTTP
                 resp.addCookie(cookie); // Adding cookie to the response
 
                 // Setting user information in the session
