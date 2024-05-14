@@ -14,9 +14,7 @@ import java.io.Serializable;
 @SessionScoped
 
 public class UsersCredentials implements Serializable {
-
     private String username;
     private String password;
     private String roleName;
-
 }
