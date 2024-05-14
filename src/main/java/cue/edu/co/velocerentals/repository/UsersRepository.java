@@ -1,5 +1,6 @@
 package cue.edu.co.velocerentals.repository;
 
+import cue.edu.co.velocerentals.models.Users;
 import cue.edu.co.velocerentals.models.UsersCredentials;
 
 import java.sql.SQLException;
@@ -14,4 +15,6 @@ public interface UsersRepository<T> {
 
     // Method to find a user by username and retrieve hashed password along with role information
     UsersCredentials findUserAndHashPassword(String username);
+    Users userDetails(String username);
+    boolean updateUserProfile(String username, String email, String fullName);
 }

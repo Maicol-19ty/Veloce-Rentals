@@ -5,6 +5,7 @@ import cue.edu.co.velocerentals.annotations.MySqlConn;
 import cue.edu.co.velocerentals.database.DataBaseConnection;
 import cue.edu.co.velocerentals.exceptions.ServiceJdbcException;
 import cue.edu.co.velocerentals.mapping.DTO.UsersDTo;
+import cue.edu.co.velocerentals.models.Users;
 import cue.edu.co.velocerentals.models.UsersCredentials;
 import cue.edu.co.velocerentals.repository.UsersRepository;
 import cue.edu.co.velocerentals.utils.HashingUtil;
@@ -122,4 +123,62 @@ public class UsersRepositoryImpl implements UsersRepository<UsersDTo> {
         }
         return usersCredentials;
     }
+
+    @Override
+    public Users userDetails(String username) {
+        Users user = null;
+
+        String query = "SELECT username, email, full_name FROM users WHERE username = ?";
+
+        try {
+            conn = DataBaseConnection.getInstance();
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, username);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = new Users();
+                    user.setUsername(resultSet.getString("username"));
+                    user.setEmail(resultSet.getString("email"));
+                    user.setFull_name(resultSet.getString("full_name"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    @Override
+    public boolean updateUserProfile(String username, String fullName, String email) {
+        boolean updateStatus = false;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = DataBaseConnection.getInstance();
+            String sqlUpdate = "UPDATE users SET full_name = ?, email = ? WHERE username = ?";
+            pstmt = conn.prepareStatement(sqlUpdate);
+
+            pstmt.setString(1, fullName);
+            pstmt.setString(2, email);
+            pstmt.setString(3, username);
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                updateStatus = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            updateStatus = false;
+        } finally {
+            if (pstmt != null) try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+        }
+
+        return updateStatus;
+    }
+
+
 }
